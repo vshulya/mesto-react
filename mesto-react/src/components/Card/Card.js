@@ -7,14 +7,14 @@ function Card(props) {
   return (
     <li className="card">
       <button type="button" className="card__delete-button button"></button>
-      <img onClick={handleClick} alt={props.name} src={props.link} className="card__image" />
+      <img onClick={handleClick} alt={props.card.name} src={props.card.link} className="card__image" />
       <div className="card__description">
-        <h2 className="card__text">{props.name}</h2>
+        <h2 className="card__text">{props.card.name}</h2>
         <div className="card__likes">
 
-          <button type="button" className="card__like button">{props.likes.length}
+          <button type="button" className="card__like button">
           </button>
-          <span className="card__likes-number"></span>
+          <span className="card__likes-number">{props.card.likes.length}</span>
         </div>
       </div>
     </li>

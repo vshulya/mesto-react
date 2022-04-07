@@ -70,6 +70,7 @@ function Main(props) {
           <ul className="cards-list">
             {cards.map(card => (
               <Card
+                card={card}
                 onCardClick={props.onCardClick}
                 name={card.name}
                 link={card.link}

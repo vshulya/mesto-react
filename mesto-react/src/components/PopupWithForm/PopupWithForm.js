@@ -2,11 +2,12 @@ import React from 'react';
 function PopupWithForm(props) {
 
   React.useEffect(() => {
+    const popup = document.querySelector(`.pop-up_place_${props.name}`);
     if (props.isOpen) {
-      document.querySelector(`.pop-up_place_${props.name}`).classList.add('pop-up_opened');
+      popup.classList.add('pop-up_opened');
     }
     else {
-      document.querySelector(`.pop-up_place_${props.name}`).classList.remove('pop-up_opened');
+      popup.classList.remove('pop-up_opened');
     }
   }, [props.isOpen]);
 
