@@ -9,34 +9,34 @@ import api from '../../utils/Api';
 
 function App() {
 
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
 
   function handleEditAvatarClick() {
-    setEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true);
   };
 
   function handleEditProfileClick() {
-    setEditProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   };
 
   function handleAddPlaceClick() {
-    setAddPlacePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
   };
 
   function handlePopupClick(card) {
     setSelectedCard(card);
-    setImagePopupOpen(true);
+    setIsImagePopupOpen(true);
   }
 
   function closeAllPopups() {
-    setEditAvatarPopupOpen(false);
-    setEditProfilePopupOpen(false);
-    setAddPlacePopupOpen(false);
-    setImagePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsImagePopupOpen(false);
   }
 
   const handleSubmitForm = (e) => {
@@ -64,14 +64,11 @@ function App() {
             title="Обновить аватар"
             onClose={closeAllPopups}
             onSubmitForm={handleSubmitForm}>
-            <fieldset className="pop-up__fieldset">
-              <label className="pop-up__field">
-                <input type="url" id="avatar-input" defaultValue="" placeholder="Ссылка на аватар" name="avatar"
-                  className="pop-up__input pop-up__input_type_profile-photo-link" required />
-                <span id="avatar-input-error" className="pop-up__input-error"></span>
-              </label>
-              <button type="submit" className="pop-up__button button">Сохранить</button>
-            </fieldset>
+            <label className="pop-up__field">
+              <input type="url" id="avatar-input" defaultValue="" placeholder="Ссылка на аватар" name="avatar"
+                className="pop-up__input pop-up__input_type_profile-photo-link" required />
+              <span id="avatar-input-error" className="pop-up__input-error"></span>
+            </label>
           </PopupWithForm>
           <PopupWithForm
             isOpen={isEditProfilePopupOpen}
@@ -80,19 +77,16 @@ function App() {
             title="Редактировать профиль"
             onClose={closeAllPopups}
             onSubmitForm={handleSubmitForm} >
-            <fieldset className="pop-up__fieldset">
-              <label className="pop-up__field">
-                <input type="text" id="name-input" defaultValue="" placeholder="Имя" name="name"
-                  className="pop-up__input pop-up__input_type_name" minLength="2" maxLength="40" required />
-                <span id="name-input-error" className="pop-up__input-error"></span>
-              </label>
-              <label className="pop-up__field">
-                <input type="text" id="job-input" defaultValue="" placeholder="Описание" name="about"
-                  className="pop-up__input pop-up__input_type_job" minLength="2" maxLength="200" required />
-                <span id="job-input-error" className="pop-up__input-error"></span>
-              </label>
-              <button type="submit" className="pop-up__button button">Сохранить</button>
-            </fieldset>
+            <label className="pop-up__field">
+              <input type="text" id="name-input" defaultValue="" placeholder="Имя" name="name"
+                className="pop-up__input pop-up__input_type_name" minLength="2" maxLength="40" required />
+              <span id="name-input-error" className="pop-up__input-error"></span>
+            </label>
+            <label className="pop-up__field">
+              <input type="text" id="job-input" defaultValue="" placeholder="Описание" name="about"
+                className="pop-up__input pop-up__input_type_job" minLength="2" maxLength="200" required />
+              <span id="job-input-error" className="pop-up__input-error"></span>
+            </label>
           </PopupWithForm>
           <PopupWithForm
             onAddPlace={handleAddPlaceClick}
@@ -102,19 +96,16 @@ function App() {
             onClose={closeAllPopups}
             onSubmitForm={handleSubmitForm}
           >
-            <fieldset className="pop-up__fieldset">
-              <label className="pop-up__field">
-                <input type="text" id="place-input" defaultValue="" placeholder="Название" name="name"
-                  className="pop-up__input pop-up__input_type_place" minLength="2" maxLength="30" required />
-                <span id="place-input-error" className="pop-up__input-error"></span>
-              </label>
-              <label className="pop-up__field">
-                <input type="url" id="link-input" defaultValue="" placeholder="Ссылка на картинку" name="link"
-                  className="pop-up__input pop-up__input_type_link" required />
-                <span id="link-input-error" className="pop-up__input-error"></span>
-              </label>
-              <button type="submit" className="pop-up__button button">Сохранить</button>
-            </fieldset>
+            <label className="pop-up__field">
+              <input type="text" id="place-input" defaultValue="" placeholder="Название" name="name"
+                className="pop-up__input pop-up__input_type_place" minLength="2" maxLength="30" required />
+              <span id="place-input-error" className="pop-up__input-error"></span>
+            </label>
+            <label className="pop-up__field">
+              <input type="url" id="link-input" defaultValue="" placeholder="Ссылка на картинку" name="link"
+                className="pop-up__input pop-up__input_type_link" required />
+              <span id="link-input-error" className="pop-up__input-error"></span>
+            </label>
           </PopupWithForm>
           <ImagePopup
             name="place_fullsize-photo"
