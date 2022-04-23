@@ -18,7 +18,6 @@ class Api {
       .then(this._checkResponse)
   };
 
-
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
@@ -65,6 +64,15 @@ class Api {
     })
       .then(this._checkResponse)
   };
+
+  changeLikeCardStatus(id, isLiked) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes `, {
+      method: isLiked ? 'DELETE' : 'PUT',
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+  };
+
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes `, {
