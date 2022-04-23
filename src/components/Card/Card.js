@@ -30,10 +30,6 @@ function Card(props) {
     props.onCardDelete(props.card);
   }
 
-
-
-
-
   return (
     <li className="card">
       <button onClick={handleDeleteClick} type="button" className={cardDeleteButtonClassName}></button>
