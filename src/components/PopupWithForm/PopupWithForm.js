@@ -1,18 +1,18 @@
 import React from 'react';
-function PopupWithForm(props) {
+function PopupWithForm({ buttonText, name, title, isOpen, onClose, onSubmitForm, children }) {
 
-  const defaultButtonText = 'Сохранить';
-  const buttonText = props.buttonText ?? defaultButtonText;
+  const defaultButtonTextValue = 'Сохранить';
+  const buttonTextValue = buttonText ?? defaultButtonTextValue;
 
   return (
-    <section className={`pop-up pop-up_place_${props.name} ${props.isOpen && "pop-up_opened"}`} >
+    <section className={`pop-up ${isOpen && "pop-up_opened"}`} >
       <div className="pop-up__container">
-        <button onClick={props.onClose} type="button" className="pop-up__close button"></button>
-        <h2 className="pop-up__title">{props.title}</h2>
-        <form onSubmit={props.onSubmitForm} name={props.name} className="pop-up__form">
+        <button onClick={onClose} type="button" className="pop-up__close button"></button>
+        <h2 className="pop-up__title">{title}</h2>
+        <form onSubmit={onSubmitForm} name={name} className="pop-up__form">
           <fieldset className="pop-up__fieldset">
-            {props.children}
-            <button type="submit" className="pop-up__button button">{buttonText}</button>
+            {children}
+            <button type="submit" className="pop-up__button button">{buttonTextValue}</button>
           </fieldset>
         </form>
       </div>

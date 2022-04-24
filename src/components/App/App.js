@@ -21,12 +21,13 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.getInitialCards()
-      .then(setCards)
-      .catch(err => {
-        console.log(err)
+    Promise.all([api.getInitialCards(), api.getProfile()])
+      .then(([cards, userData]) => {
+        setCurrentUser(userData);
+        setCards(cards);
       })
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
 
   function handleCardLike(card) {
@@ -49,15 +50,6 @@ function App() {
         .catch(err => console.log(err))
     }
   }
-
-  React.useEffect(() => {
-    api.getProfile()
-      .then(res => {
-        console.log(res)
-        setCurrentUser(res)
-      })
-      .catch(err => console.log(err));
-  }, []);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -149,7 +141,6 @@ function App() {
             />
 
             <ImagePopup
-              name="place_fullsize-photo"
               card={selectedCard}
               onClose={closeAllPopups}
               isOpen={isImagePopupOpen}

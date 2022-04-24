@@ -2,7 +2,7 @@ import React from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function EditProfilePopup(props) {
+function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
 
@@ -14,7 +14,7 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   // Обработчик изменения инпута обновляет стейт
   function handleNameChange(e) {
@@ -30,7 +30,7 @@ function EditProfilePopup(props) {
     e.preventDefault();
 
     // Передаём значения управляемых компонентов во внешний обработчик
-    props.onUpdateUser({
+    onUpdateUser({
       name,
       about: description,
     });
@@ -38,19 +38,18 @@ function EditProfilePopup(props) {
 
   return (
     <PopupWithForm
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmitForm={handleSubmit}
-      name="place_title"
       title="Редактировать профиль"
     >
       <label className="pop-up__field">
-        <input type="text" defaultValue={name} onChange={handleNameChange} placeholder="Имя" id="name-input" name="name"
+        <input type="text" value={name || ''} onChange={handleNameChange} placeholder="Имя" id="name-input" name="name"
           className="pop-up__input pop-up__input_type_name" minLength="2" maxLength="40" required />
         <span id="name-input-error" className="pop-up__input-error"></span>
       </label>
       <label className="pop-up__field">
-        <input type="text" defaultValue={description} onChange={handleDescriptionChange} id="job-input" placeholder="Описание" name="about"
+        <input type="text" value={description || ''} onChange={handleDescriptionChange} id="job-input" placeholder="Описание" name="about"
           className="pop-up__input pop-up__input_type_job" minLength="2" maxLength="200" required />
         <span id="job-input-error" className="pop-up__input-error"></span>
       </label>
